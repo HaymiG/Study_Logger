@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% block title %}Profile — Study Logger{% endblock %}
+
+{% block content %}
+<main class="page page--active" id="page-profile">
+  <div class="container">
+    <header class="page-header fade-in">
+      <div>
+        <h1 class="page-title">Your Profile </h1>
+        <p class="page-subtitle">Manage your account and preferences.</p>
+      </div>
+    </header>
+
+    <div class="profile-grid fade-in">
+      <!-- Profile Card -->
+      <div class="card profile-card" id="profile-card">
+        <div class="profile-avatar-area">
+          <div class="profile-avatar" id="profile-avatar">
+            <span id="profile-initials">SL</span>
+          </div>
+          <h2 class="profile-name" id="profile-display-name">Study Learner</h2>
+          <p class="profile-email" id="profile-display-email">learner@study.app</p>
+        </div>
+        <div class="profile-stats-mini">
+          <div class="mini-stat">
+            <span class="mini-stat-val" id="profile-total-tasks">0</span>
+            <span class="mini-stat-label">Total Tasks</span>
+          </div>
+          <div class="mini-stat">
+            <span class="mini-stat-val" id="profile-total-hours">0h</span>
+            <span class="mini-stat-label">Total Hours</span>
+          </div>
+          <div class="mini-stat">
+            <span class="mini-stat-val" id="profile-total-streak">0</span>
+            <span class="mini-stat-label">Best Streak</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Settings Card -->
+      <div class="card settings-card" id="settings-card">
+        <div class="card-header">
+          <h2 class="card-title">Settings</h2>
+        </div>
+        <form id="profile-form" autocomplete="off">
+          <div class="settings-grid">
+            <div class="form-group">
+              <label for="profile-name-input" class="form-label">Display Name</label>
+              <input type="text" id="profile-name-input" class="form-input" placeholder="Your Name" />
+            </div>
+            <div class="form-group">
+              <label for="profile-email-input" class="form-label">Email</label>
+              <input type="email" id="profile-email-input" class="form-input" placeholder="you@example.com" />
+            </div>
+            <div class="form-group">
+              <label for="profile-goal-input" class="form-label">Daily Task Goal</label>
+              <input type="number" id="profile-goal-input" class="form-input" placeholder="5" min="1" max="50" />
+            </div>
+            <div class="form-group form-group--toggle">
+              <label class="form-label">Dark Mode</label>
+              <label class="toggle" id="theme-toggle">
+                <input type="checkbox" id="theme-checkbox" />
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+          </div>
+          <button type="submit" class="btn btn--primary" id="profile-save-btn">
+            Save Changes
+          </button>
+          <span class="save-feedback" id="save-feedback"> Saved successfully!</span>
+        </form>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}

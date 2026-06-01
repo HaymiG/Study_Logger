@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+{% block title %}Dashboard — Study Logger{% endblock %}
+
+{% block content %}
+<main class="page page--active" id="page-dashboard">
+  <div class="container">
+    <!-- Hero Stats -->
+    <header class="page-header fade-in">
+      <div>
+        <h1 class="page-title" id="greeting">Good afternoon! 👋</h1>
+        <p class="page-subtitle">Here's your learning progress at a glance.</p>
+      </div>
+      <div class="header-date" id="header-date"></div>
+    </header>
+
+    <section class="stats-row fade-in" id="stats-row">
+      <div class="stat-card" id="stat-tasks-today">
+        <div class="stat-icon stat-icon--indigo">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 11l3 3L22 4" />
+            <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" />
+          </svg>
+        </div>
+        <div class="stat-info">
+          <span class="stat-value" id="stat-val-tasks">0</span>
+          <span class="stat-label">Tasks Today</span>
+        </div>
+      </div>
+      <div class="stat-card" id="stat-streak">
+        <div class="stat-icon stat-icon--teal">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+          </svg>
+        </div>
+        <div class="stat-info">
+          <span class="stat-value" id="stat-val-streak">0</span>
+          <span class="stat-label">Day Streak</span>
+        </div>
+      </div>
+      <div class="stat-card" id="stat-hours">
+        <div class="stat-icon stat-icon--rose">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10" />
+            <polyline points="12 6 12 12 16 14" />
+          </svg>
+        </div>
+        <div class="stat-info">
+          <span class="stat-value" id="stat-val-hours">0h</span>
+          <span class="stat-label">Hours Logged</span>
+        </div>
+      </div>
+      <div class="stat-card" id="stat-completion">
+        <div class="stat-icon stat-icon--amber">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 11.08V12a10 10 0 11-5.93-9.14" />
+            <polyline points="22 4 12 14.01 9 11.01" />
+          </svg>
+        </div>
+        <div class="stat-info">
+          <span class="stat-value" id="stat-val-completion">0%</span>
+          <span class="stat-label">Completion</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Charts Row -->
+    <section class="charts-row fade-in">
+      <div class="card chart-card chart-card--wide" id="chart-line-card">
+        <div class="card-header">
+          <h2 class="card-title">Weekly Study Hours</h2>
+          <span class="card-badge">This Week</span>
+        </div>
+        <div class="chart-wrapper">
+          <canvas id="chart-line" width="700" height="300"></canvas>
+        </div>
+      </div>
+      <div class="card chart-card" id="chart-pie-card">
+        <div class="card-header">
+          <h2 class="card-title">Categories</h2>
+        </div>
+        <div class="chart-wrapper chart-wrapper--pie">
+          <canvas id="chart-pie" width="280" height="280"></canvas>
+        </div>
+        <div class="pie-legend" id="pie-legend"></div>
+      </div>
+    </section>
+
+    <!-- Progress Section -->
+    <section class="progress-section fade-in">
+      <div class="card" id="daily-goal-card">
+        <div class="card-header">
+          <h2 class="card-title">Daily Goal</h2>
+          <span class="card-badge" id="goal-badge">0 / 5 tasks</span>
+        </div>
+        <div class="goal-ring-wrapper">
+          <svg class="goal-ring" viewBox="0 0 140 140" id="goal-ring">
+            <circle cx="70" cy="70" r="60" class="goal-ring-bg" />
+            <circle cx="70" cy="70" r="60" class="goal-ring-fill" id="goal-ring-fill" />
+            <text x="70" y="70" class="goal-ring-text" id="goal-ring-text">0%</text>
+          </svg>
+        </div>
+      </div>
+      <div class="card category-progress-card" id="category-progress-card">
+        <div class="card-header">
+          <h2 class="card-title">Category Progress</h2>
+        </div>
+        <div class="category-bars" id="category-bars">
+          <!-- populated by JS -->
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+{% endblock %}

@@ -1,0 +1,90 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" {% if request.user.is_authenticated and request.user.profile.theme == 'dark' %}data-theme="dark"{% endif %}>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="Study Logger — Track your daily learning activities with visual dashboards, task logging, and progress analytics." />
+  <title>{% block title %}Study Logger — Track Your Learning{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+</head>
+
+<body>
+
+  {% if request.user.is_authenticated %}
+  <!-- ─── Navigation ─── -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="{% url 'dashboard' %}" class="nav-logo" id="nav-logo">
+        <span class="logo-icon">📖</span>
+        <span class="logo-text">Study<span class="logo-accent">Logger</span></span>
+      </a>
+
+      <div class="nav-links" id="nav-links">
+        <a href="{% url 'dashboard' %}"
+          class="nav-link {% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}" id="nav-dashboard">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="7" height="7" rx="1" />
+            <rect x="14" y="3" width="7" height="7" rx="1" />
+            <rect x="3" y="14" width="7" height="7" rx="1" />
+            <rect x="14" y="14" width="7" height="7" rx="1" />
+          </svg>
+          <span>Dashboard</span>
+        </a>
+        <a href="{% url 'tasks' %}"
+          class="nav-link {% if request.resolver_match.url_name == 'tasks' %}active{% endif %}" id="nav-tasks">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 11l3 3L22 4" />
+            <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" />
+          </svg>
+          <span>Log Tasks</span>
+        </a>
+        <a href="{% url 'profile' %}"
+          class="nav-link {% if request.resolver_match.url_name == 'profile' %}active{% endif %}" id="nav-profile">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
+            <circle cx="12" cy="7" r="4" />
+          </svg>
+          <span>Profile</span>
+        </a>
+      </div>
+
+      <div class="nav-actions">
+        <div class="nav-avatar" id="nav-avatar">
+          <div class="avatar-circle" id="avatar-circle">
+            <span id="avatar-initials">{{ user_initials }}</span>
+          </div>
+        </div>
+        <a href="{% url 'logout' %}" class="nav-link nav-link--logout" title="Logout">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4" />
+            <polyline points="16 17 21 12 16 7" />
+            <line x1="21" y1="12" x2="9" y2="12" />
+          </svg>
+        </a>
+      </div>
+
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+  {% endif %}
+
+  {% block content %}{% endblock %}
+
+  <!-- Toast Notification -->
+  <div class="toast-container" id="toast-container"></div>
+
+  {% if request.user.is_authenticated %}
+  <script src="{% static 'js/app.js' %}"></script>
+  {% endif %}
+  {% block extra_js %}{% endblock %}
+</body>
+
+</html>

@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% block title %}Log Tasks — Study Logger{% endblock %}
+
+{% block content %}
+<main class="page page--active" id="page-tasks">
+  <div class="container">
+    <header class="page-header fade-in">
+      <div>
+        <h1 class="page-title">Log a Task ✏️</h1>
+        <p class="page-subtitle">Add your learning activities and track progress.</p>
+      </div>
+    </header>
+
+    <!-- Task Form -->
+    <section class="card task-form-card fade-in" id="task-form-card">
+      <form id="task-form" autocomplete="off">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="task-name" class="form-label">Task Name</label>
+            <input type="text" id="task-name" class="form-input" placeholder="e.g. Read Chapter 5 of CLRS" required />
+          </div>
+          <div class="form-group">
+            <label for="task-category" class="form-label">Category</label>
+            <select id="task-category" class="form-input form-select" required>
+              <option value="" disabled selected>Choose a category</option>
+              <option value="reading"> Reading</option>
+              <option value="coding"> Coding</option>
+              <option value="exercises"> Exercises</option>
+              <option value="lectures"> Lectures</option>
+              <option value="writing"> Writing</option>
+              <option value="research"> Research</option>
+              <option value="other"> Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="task-duration" class="form-label">Duration (minutes)</label>
+            <input type="number" id="task-duration" class="form-input" placeholder="30" min="1" max="480" required />
+          </div>
+          <div class="form-group">
+            <label for="task-notes" class="form-label">Notes <span class="optional">(optional)</span></label>
+            <textarea id="task-notes" class="form-input form-textarea" rows="2"
+              placeholder="Quick notes about this task…"></textarea>
+          </div>
+        </div>
+        <button type="submit" class="btn btn--primary btn--icon" id="task-submit-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="12" y1="5" x2="12" y2="19" />
+            <line x1="5" y1="12" x2="19" y2="12" />
+          </svg>
+          Add Task
+        </button>
+      </form>
+    </section>
+
+    <!-- Filter Bar -->
+    <section class="filter-bar fade-in" id="filter-bar">
+      <button class="filter-chip active" data-filter="all" id="filter-all">All</button>
+      <button class="filter-chip" data-filter="reading" id="filter-reading">📚 Reading</button>
+      <button class="filter-chip" data-filter="coding" id="filter-coding">💻 Coding</button>
+      <button class="filter-chip" data-filter="exercises" id="filter-exercises">🏋️ Exercises</button>
+      <button class="filter-chip" data-filter="lectures" id="filter-lectures">🎓 Lectures</button>
+      <button class="filter-chip" data-filter="writing" id="filter-writing">✍️ Writing</button>
+      <button class="filter-chip" data-filter="research" id="filter-research">🔬 Research</button>
+      <button class="filter-chip" data-filter="other" id="filter-other">📌 Other</button>
+    </section>
+
+    <!-- Task List -->
+    <section class="task-list" id="task-list">
+      <div class="empty-state" id="empty-state">
+        <div class="empty-icon">📝</div>
+        <h3>No tasks yet</h3>
+        <p>Start logging your learning activities above!</p>
+      </div>
+    </section>
+  </div>
+</main>
+{% endblock %}
